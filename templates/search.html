@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadesreption %}
+    We have a variety of products.
+{% endblock %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <p class="my_search_text">You have searched for: <b>"{{ query }}"</b></p>
+</div>
+
+<div class="container">
+    <div class="row mx-auto product-row">
+        {% for product in products %}
+        <div class="my_bottom_margin col-6 col-sm-6 col-md-3 col-lg-3 product-card">
+            <div class="card text-center" style="min-width: 18rem;">
+                <a href="{{ product.get_url }}">
+                    <img class="card-img-top my_image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+                <div class="card-body">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+    </div> <!-- Close the row here to ensure it's outside the loop -->
+    <div class="row mx-auto">
+        <p class="text-center my_search_text">0 results found</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
